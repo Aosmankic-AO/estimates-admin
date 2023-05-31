@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navbar */
+
+.navbar {
+    text-align: center;
+    padding: 14px 16px;
+    background-color: rgb(240, 76, 76);
+    font-size: 20px;
+}
+
+.navbar a {
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+     color: black;
+}
+
+
+
+/* Footer */
+
+.footer {
+    background-color: rgb(240, 76, 76);
+    width: 100%;
+    text-align: center;
+    position:fixed;
+    left: 0;
+    bottom: 0;
+}
