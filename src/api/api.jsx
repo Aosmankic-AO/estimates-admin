@@ -1,12 +1,21 @@
 import axios from 'axios';
 
 export const updateData = () => {
-    axios.put(`https://reqres.in/api/users/2`)
+    return axios.put(`https://reqres.in/api/users/2`)
     .then(response => {
-        console.log('Response Status: ' + response.status);
+        if(response.status === 200) {
+          console.log('Data updated successfully.');
+          console.log('Response Status: ' + response.status);
+        }
+        return response;
       })
+
       .catch(error => {
-        console.error(error);
+        if(error.response && error.response.status === 404) {
+          console.log('Not Found: ' + error.response.status)
+        } else {
+          console.log('An error occured: ' + error);
+        }
       });
   };
   
