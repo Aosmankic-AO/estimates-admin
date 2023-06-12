@@ -8,11 +8,17 @@ import { updateData } from "../../api/api";
     /** States for message response and input textbox */
     const [submitMessage, setSubmitMessage] = useState("");
     const [trackingNumber, setTrackingNumber] = useState("");
+    /**Status spinner state */
+    const [isLoading, setIsLoading] = useState(false);
 
 
     /** Handle submit button click */
     const handleButtonClick = () => {
-       updateData()
+        //show spinner
+        setIsLoading(true);
+
+        setTimeout(() => {
+            updateData()
        .then(response => {
         if(response && response.status === 200) {
             //If successfull, show message and clear textbox
@@ -24,8 +30,13 @@ import { updateData } from "../../api/api";
        })
        .catch(error => {
         console.log(error);
-        setSubmitMessage("An error occured while updating data. Check console log. ")
+        setSubmitMessage("An error occured while updating data. Check console log.")
        })
+       .finally(() => {
+        setIsLoading(false); //hide spinner
+       });
+        }, 1000); //API delay 1 sec
+       
       };
       
       /**Text box focus */
@@ -38,7 +49,12 @@ import { updateData } from "../../api/api";
         <div className="DataAnonymization-container">
             <Header />
             <h1>Data Anonmymization Page</h1>
-            <p>{submitMessage}</p>
+            <div className="overlay" style={{display: isLoading ? "block" : "none"}}></div>
+            {isLoading ? (<div className="spinner-overlay">
+                <div className="spinner"></div>
+            </div>
+            ) : (
+            <p>{submitMessage}</p>)}
             <label>Tracking Number</label>
             <input type="text" value={trackingNumber} onChange={e => setTrackingNumber(e.target.value)} onFocus={handleTextBoxFocus} />
             <button onClick={handleButtonClick}>Submit</button>
