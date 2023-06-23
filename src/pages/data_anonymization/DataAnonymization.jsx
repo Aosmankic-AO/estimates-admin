@@ -18,7 +18,7 @@ import { updateData } from "../../api/api";
         setIsLoading(true);
 
         setTimeout(() => {
-            updateData()
+            updateData(trackingNumber)
        .then(response => {
         if(response && response.status === 200) {
             //If successfull, show message and clear textbox

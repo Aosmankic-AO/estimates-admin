@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { API_PATH } from '../constants/apiConstants';
 
-export const updateData = () => {
-    return axios.put(`https://reqres.in/api/users/2`)
+export const updateData = (trackingNumber) => {
+    return axios.put(`${API_PATH}/${trackingNumber}`)
     .then(response => {
         if(response.status === 200) {
           console.log('Data updated successfully.');
